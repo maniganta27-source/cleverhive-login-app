@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: "http://localhost:4000/api",
+export default axios.create({
+  baseURL: "https://cleverhive-app.onrender.com/api", // your Render backend URL
 });
-
-export default api;
