@@ -25,13 +25,13 @@ const __dirname = path.dirname(__filename);
 // Serve frontend build folder
 app.use(express.static(path.join(__dirname, "frontend", "build")));
 
-// Catch-all route for React routing
-app.get("/*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
-});
-
 // API routes
 app.use("/api/auth", authRoutes);
+
+// Catch-all for React frontend (must use app.use for ES modules)
+app.use((req, res) => {
+  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+});
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
