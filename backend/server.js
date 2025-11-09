@@ -22,14 +22,15 @@ app.use(express.json());
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve frontend
+// Serve frontend build folder
 app.use(express.static(path.join(__dirname, "frontend", "build")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+// Catch-all route for React routing
+app.get("/*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
 });
 
-// Routes
+// API routes
 app.use("/api/auth", authRoutes);
 
 const PORT = process.env.PORT || 4000;
